@@ -5,7 +5,7 @@ Guess my number is a simple and beginner-friendly project in which the developer
 - Added button functionality (JS) and created simple animation by using CSS
 - Used simple CSS manipulation by using JavaScript
 - Implemented simple DOM manipulation by using JavaScript
-- Used netlify to deploy this Web application (https://kaidiyar-guess-my-number.netlify.app)
+- Used netlify to deploy this Desktop Web application (https://kaidiyar-guess-my-number.netlify.app)
 
 ---
 
