@@ -15,24 +15,40 @@ let highscore = 0;
 const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
 };
+const displayMark = function (number) {
+  document.querySelector(".mark").textContent = number;
+};
+const displayScore = function (score) {
+  document.querySelector(".score").textContent = score;
+};
+const displayHighscore = function (highscore) {
+  document.querySelector(".highscore").textContent = highscore;
+};
+const styleBody = function (color) {
+  document.querySelector("body").style.backgroundColor = color;
+};
+const styleMark = function (width) {
+  document.querySelector(".mark").style.width = width;
+};
 
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
   // When there is no input
-  if (!guess) {
+  if (!guess && guess !== 0) {
     displayMessage("⛔️ No number!");
     // When player wins
+  } else if (guess > 64 || guess < 1) {
+    displayMessage("❌ Out of the range!");
   } else if (guess === secretNumber) {
     displayMessage("🎉 You Win!");
-    document.querySelector(".mark").textContent = secretNumber;
+    displayMark(secretNumber);
 
-    document.querySelector("body").style.backgroundColor = "#3ebe41";
-
-    document.querySelector(".mark").style.width = "30rem";
+    styleBody("#3ebe41");
+    styleMark("30rem");
 
     if (score > highscore) {
       highscore = score;
-      document.querySelector(".highscore").textContent = highscore;
+      displayHighscore(highscore);
     }
     // When guess is too low
   } else if (guess !== secretNumber) {
@@ -40,10 +56,10 @@ document.querySelector(".check").addEventListener("click", function () {
     if (score > 1) {
       displayMessage(guess > secretNumber ? "📈 Too High!" : "📉 Too Low!");
       score--;
-      document.querySelector(".score").textContent = score;
+      displayScore(score);
     } else {
       displayMessage("💥 You lost the game!");
-      document.querySelector(".score").textContent = 0;
+      displayScore(0);
     }
   }
 });
@@ -52,12 +68,11 @@ document.querySelector(".again").addEventListener("click", function () {
   score = 10;
   secretNumber = Math.trunc(Math.random() * 64) + 1;
   displayMessage(`Why didn't you start? Start guessing 😤`);
-  document.querySelector(".score").textContent = score;
-  document.querySelector(".mark").textContent = "?";
+  displayScore(score);
+  displayMark("?");
   document.querySelector(".guess").value = "";
-
-  document.querySelector("body").style.backgroundColor = "#0d1821";
-  document.querySelector(".mark").style.width = "15rem";
+  styleBody("#0d1821");
+  styleMark("15rem");
 });
 
 // Do for all repetetive staff and then use this code to make a github repository
